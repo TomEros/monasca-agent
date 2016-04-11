@@ -4,8 +4,10 @@ Description=Monasca Agent
 [Service]
 Type=simple
 User={monasca_user}
-Group={monasca_user}
+Group=monasca
 Restart=on-failure
+ExecStartPre=-/bin/mkdir -p /var/run/monasca
+PermissionsStartOnly=true
 ExecStart={prefix}/bin/supervisord -c {config_dir}/supervisor.conf -n
 
 [Install]
